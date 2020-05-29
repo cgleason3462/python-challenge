@@ -3,6 +3,7 @@ import csv
 
 #route to correct csv
 pollData = os.path.join("..", "election_data.csv")
+txtFile = "Poll_data.txt"
 
 #Open csv data
 with open(pollData) as csvfile:
@@ -50,7 +51,6 @@ with open(pollData) as csvfile:
         
         #print most voted for candidate
         print(most_Voted(candidateList))
-      
     
     print("Election Results")
     print("-------------------------")
@@ -58,9 +58,19 @@ with open(pollData) as csvfile:
     print("-------------------------")
     #loop through list and print the percentage and total for each candidate that recevied votes
     for x in range(len(uniqueCandidates)):
-        print(uniqueCandidates[x] + ": " + str(percentageVotes[x]) +"% (" + str(totalVotes[x])+ ")")
+       print(uniqueCandidates[x] + ": " + str(percentageVotes[x]) +"% (" + str(totalVotes[x])+ ")")
     print("-------------------------")
     print(f'Winner: {most_Voted(candidateList)}')
     print("-------------------------")
     
+with open(txtFile, "w") as text:
     
+    text.write("Election Results")
+    text.write("\n-------------------------")
+    text.write(f'\nTotal Votes: {Total}')
+    text.write("\n-------------------------")
+    for x in range(len(uniqueCandidates)):
+       text.write(uniqueCandidates[x] + ": " + str(percentageVotes[x]) +"% (" + str(totalVotes[x])+ ")")
+    text.write("\n-------------------------")
+    text.write(f'\nWinner: {most_Voted(candidateList)}')
+    text.write("\n-------------------------")
